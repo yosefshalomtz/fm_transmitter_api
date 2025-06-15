@@ -4,10 +4,13 @@
 from flask import Flask, render_template, request
 import json
 import math
-import subproccess
+import subprocess
 
 
 app = Flask(__name__)
+host = "localhost"
+port = 8080
+
 
 # status of fm_transmitter app arguments
 status = {}
@@ -50,7 +53,8 @@ def play():
 	
 	if not isValidInput(frq, playmode, uploadedfilename): return json.dumps({"status": "error invalid parameter"})
 	# here the code that play fm_transmitter and update {status}
-	fm_transmitter = subproccess.Popen(["fghjkiuhygt"])
+	wav_file = ""
+	if playmode=="file": 
 	return json.dumps({"status": "success"})
 
 @app.route('/api/test')
@@ -59,4 +63,4 @@ def test():
 
 
 if __name__ == '__main__':
-	app.run(host="0.0.0.0", debug=False)
+	app.run(host=host, port=port, debug=False)
