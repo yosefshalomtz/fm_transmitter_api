@@ -54,7 +54,17 @@ def play():
 	if not isValidInput(frq, playmode, uploadedfilename): return json.dumps({"status": "error invalid parameter"})
 	# here the code that play fm_transmitter and update {status}
 	wav_file = ""
-	if playmode=="file": 
+	if playmode=="file": wav_file = "./wav_files/"+uploadedfilename
+	else: wav_file = "block.wav"
+	fm_transmitter = subprocess.Popen(["fm_transmitter", "-f", frq, wav_file])
+	if fm_transmitter.poll():
+		if fm_transmitter.returncode!=0: ({"status": "error fm_transmitter failed to start"})
+	else:
+		status["frq"] = frq
+		status["playmode"] = playmode
+		status["uploadedfilename"] = uploadedfilename
+		status["status"] = "playing"
+		status["pid"] = fm_transmitter.pid
 	return json.dumps({"status": "success"})
 
 @app.route('/api/test')
