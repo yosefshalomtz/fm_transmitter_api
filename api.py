@@ -43,6 +43,13 @@ def isValidInput(frq, playmode, uploadedfilename):
 def getstatus():
 	return json.dumps(status)
 
+# upload wav file to server, and add it to {uploaded_files} list.
+@app.route('/api/uploadwavfile', methods=['POST'])
+def uploadwavfile():
+	# here logic to upload wav file
+	
+	return json.dumps({"status": "success"})
+
 # frq: frequency, m: playmode, (optional) uploadedfilename: uploadedfilename
 # see also isValidInput() comments.
 @app.route('/api/play')
