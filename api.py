@@ -19,12 +19,17 @@ uploaded_files = ["test.wav"]
 # fm_transmitter app
 fm_transmitter = None
 
+def debug_log(o):
+	print(o)
+
+
 def lookForFmTransmitter():
 	# check if fm_transmitter is installed in $PATH
 	try:
 		subprocess.run(["fm_transmitter", "--version"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 		return True
-	except FileNotFoundError:
+	except FileNotFoundError as e:
+		debug_log(e)
 		return False
 
 # {frq} most be valid string=>float, {playmode} nost be "block" or "file",
