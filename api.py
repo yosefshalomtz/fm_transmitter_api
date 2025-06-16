@@ -5,6 +5,7 @@ from flask import Flask, render_template, request
 import json
 import math
 import subprocess
+from time import sleep
 
 
 app = Flask(__name__)
@@ -72,7 +73,8 @@ def play():
 	wav_file = ""
 	if playmode=="file": wav_file = "./wav_files/"+uploadedfilename
 	else: wav_file = "block.wav"
-	fm_transmitter = subprocess.Popen(["fm_transmitter", "-f", frq, wav_file])
+	fm_transmitter = subprocess.Popen(["fm_transmitter", "-f", frq, wav_file, "-r"])
+	sleep(1)
 	if fm_transmitter.poll():
 		if fm_transmitter.returncode!=0: ({"status": "error fm_transmitter failed to start"})
 	else:
