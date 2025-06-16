@@ -3,7 +3,7 @@ This application wraps the fm_transmitter application available in the following
 ## requirements:
 - python installed.
 - flask installed. (available with: pip install flask).
-- fm_transmitter installed <b>(in $PATH)</b>.
+- fm_transmitter installed **(in $PATH)**.
 
 ## RUN
 in the terminal (in this project directory):
