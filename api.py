@@ -12,7 +12,8 @@ host = "localhost"
 port = 8080
 
 
-# status of fm_transmitter app arguments
+# status of fm_transmitter app arguments:
+# {frq} - frequency {playmode} "block" or "file" {uploadedfilename} uploaded file name
 status = {}
 uploaded_files = ["test.wav"]
 # fm_transmitter app
@@ -71,7 +72,6 @@ def play():
 		status["playmode"] = playmode
 		status["uploadedfilename"] = uploadedfilename
 		status["status"] = "playing"
-		status["pid"] = fm_transmitter.pid
 	return json.dumps({"status": "success"})
 
 @app.route('/api/test')
