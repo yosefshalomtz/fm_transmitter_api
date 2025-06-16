@@ -8,7 +8,7 @@ import subprocess
 
 
 app = Flask(__name__)
-host = "localhost"
+host = "0.0.0.0"
 port = 8080
 
 
@@ -18,6 +18,14 @@ status = {}
 uploaded_files = ["test.wav"]
 # fm_transmitter app
 fm_transmitter = None
+
+def lookForFmTransmitter():
+	# check if fm_transmitter is installed in $PATH
+	try:
+		subprocess.run(["fm_transmitter", "--version"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+		return True
+	except FileNotFoundError:
+		return False
 
 # {frq} most be valid string=>float, {playmode} nost be "block" or "file",
 # if {playmode}=="file", {uploadedfilename} most be one of {uploaded_files} list.
@@ -44,13 +52,6 @@ def isValidInput(frq, playmode, uploadedfilename):
 def getstatus():
 	return json.dumps(status)
 
-# upload wav file to server, and add it to {uploaded_files} list.
-@app.route('/api/uploadwavfile', methods=['POST'])
-def uploadwavfile():
-	# here logic to upload wav file
-	
-	return json.dumps({"status": "success"})
-
 # frq: frequency, m: playmode, (optional) uploadedfilename: uploadedfilename
 # see also isValidInput() comments.
 @app.route('/api/play')
@@ -60,6 +61,8 @@ def play():
 	uploadedfilename = request.args.get('uploadedfilename')
 	
 	if not isValidInput(frq, playmode, uploadedfilename): return json.dumps({"status": "error invalid parameter"})
+	# check if fm_transmitter is installed in $PATH
+	if lookForFmTransmitter()==False: return json.dumps({"status": "error fm_transmitter not found in $PATH"})
 	# here the code that play fm_transmitter and update {status}
 	wav_file = ""
 	if playmode=="file": wav_file = "./wav_files/"+uploadedfilename
