@@ -5,7 +5,7 @@
 - flask installed. (available with: pip install flask).
 - fm_transmitter installed <b>(in $PATH)</b>.
 
-### RUN
+## RUN
 run with:
 ``` bash
 python api.py
