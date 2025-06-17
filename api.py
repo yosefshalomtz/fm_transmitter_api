@@ -6,6 +6,7 @@ import json
 import math
 import subprocess
 from time import sleep
+import FmTransmitter
 
 
 app = Flask(__name__)
@@ -13,25 +14,10 @@ host = "0.0.0.0"
 port = 8080
 
 
-# status of fm_transmitter app arguments:
-# {frq} - frequency {playmode} "block" or "file" {uploadedfilename} uploaded file name
-status = {}
 uploaded_files = ["test.wav"]
 # fm_transmitter app
-fm_transmitter = None
+fmt = FmTransmitter()
 
-def debug_log(o):
-	print(o)
-
-
-def lookForFmTransmitter():
-	# check if fm_transmitter is installed in $PATH
-	try:
-		subprocess.run(["fm_transmitter", "--version"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-		return True
-	except FileNotFoundError as e:
-		debug_log(e)
-		return False
 
 # {frq} most be valid string=>float, {playmode} nost be "block" or "file",
 # if {playmode}=="file", {uploadedfilename} most be one of {uploaded_files} list.
@@ -56,7 +42,7 @@ def isValidInput(frq, playmode, uploadedfilename):
 
 @app.route('/api/getstatus')
 def getstatus():
-	return json.dumps(status)
+	return fmt.status
 
 # frq: frequency, m: playmode, (optional) uploadedfilename: uploadedfilename
 # see also isValidInput() comments.
@@ -68,20 +54,17 @@ def play():
 	
 	if not isValidInput(frq, playmode, uploadedfilename): return json.dumps({"status": "error invalid parameter"})
 	# check if fm_transmitter is installed in $PATH
-	if lookForFmTransmitter()==False: return json.dumps({"status": "error fm_transmitter not found in $PATH"})
+	if fmt.exsists_executable()==False: return json.dumps({"status": "error fm_transmitter not found in $PATH"})
+	# check if fm_transmitter is already running
+	if fmt.status=="playing": return json.dumps({"status": "error fm_transmitter already running"})
 	# here the code that play fm_transmitter and update {status}
 	wav_file = ""
 	if playmode=="file": wav_file = "./wav_files/"+uploadedfilename
 	else: wav_file = "block.wav"
-	fm_transmitter = subprocess.Popen(["fm_transmitter", "-f", frq, wav_file, "-r"])
-	sleep(1)
-	if fm_transmitter.poll():
-		if fm_transmitter.returncode!=0: ({"status": "error fm_transmitter failed to start"})
-	else:
-		status["frq"] = frq
-		status["playmode"] = playmode
-		status["uploadedfilename"] = uploadedfilename
-		status["status"] = "playing"
+	# now play the fm_transmitter
+	fmt.frequency = frq
+	fmt.file = wav_file
+	fmt.play()
 	return json.dumps({"status": "success"})
 
 @app.route('/api/test')
