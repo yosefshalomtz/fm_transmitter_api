@@ -1,6 +1,7 @@
 import subprocess
 import threading
 import time
+import shutil
 
 class FmTransmitter:
     def __init__(self):
@@ -18,7 +19,6 @@ class FmTransmitter:
                 self.status = "playing"
             else:
                 self.status = "stopped"
-            time.sleep(0.05)
 
     def exists_executable(self):
         """Check if the fm_transmitter executable exists in the system path."""
@@ -30,9 +30,8 @@ class FmTransmitter:
 
     def play(self):
         """Start the fm_transmitter process with the specified frequency and file."""
-        self.process = subprocess.Popen(['sudo', 'fm_transmitter', '-f', self.frequency, self.file, '-r'])
+        self.process = subprocess.Popen(['sudo', shutil.which("fm_transmitter"), '-f', self.frequency, self.file, '-r'])
             # stderr=subprocess.DEVNULL, stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL)
-        self.status = "playing"
 
 
     def stop(self):
