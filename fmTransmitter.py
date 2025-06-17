@@ -36,5 +36,5 @@ class FmTransmitter:
 
     def stop(self):
         if self.status == "playing":
-            self.process.terminate()
+            self.process.kill()
 
