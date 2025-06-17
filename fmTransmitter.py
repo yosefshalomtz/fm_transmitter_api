@@ -20,7 +20,7 @@ class FmTransmitter:
                 self.status = "stopped"
             time.sleep(0.05)
 
-    def exists_executable():
+    def exists_executable(self):
         """Check if the fm_transmitter executable exists in the system path."""
         try:
             subprocess.run(["fm_transmitter", "--version"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
