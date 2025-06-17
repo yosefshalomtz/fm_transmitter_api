@@ -6,7 +6,7 @@ import json
 import math
 import subprocess
 from time import sleep
-import FmTransmitter
+from fmTransmitter import FmTransmitter
 
 
 app = Flask(__name__)
