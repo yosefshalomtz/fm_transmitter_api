@@ -24,6 +24,7 @@ class FmTransmitter:
         """Check if the fm_transmitter executable exists in the system path."""
         try:
             subprocess.run(["fm_transmitter", "--version"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            self.status = "playing"
             return True
         except FileNotFoundError:
             return False
