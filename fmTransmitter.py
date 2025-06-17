@@ -30,11 +30,11 @@ class FmTransmitter:
 
     def play(self):
         """Start the fm_transmitter process with the specified frequency and file."""
-        self.process = subprocess.Popen(['sudo', shutil.which("fm_transmitter"), '-f', self.frequency, self.file, '-r'])
-            # stderr=subprocess.DEVNULL, stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL)
+        self.process = subprocess.Popen(['sudo', shutil.which("fm_transmitter"), '-f', self.frequency, self.file, '-r'],
+            stderr=subprocess.DEVNULL, stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL)
 
 
     def stop(self):
         if self.status == "playing":
-            self.process.kill()
-
+            subprocess.run(["sudo", "kill", "-9", str(self.process.pid)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            self.process.wait()
