@@ -1,12 +1,13 @@
 import subprocess
 import threading
+import time
 
 class FmTransmitter:
     def __init__(self):
         # status: stopped, playing
-        self.status = ""
-        self.frequency = ""
-        self.file = ""
+        self.status = "stopped"
+        self.frequency = "88.0"  # default frequency
+        self.file = "./wav_files/block.wav" # default file
         self.process = None
         threading.Thread(target=self.check_process, daemon=True).start()
 
@@ -17,8 +18,9 @@ class FmTransmitter:
                 self.status = "playing"
             else:
                 self.status = "stopped"
+            time.sleep(0.05)
 
-    def exsists_executable():
+    def exists_executable():
         """Check if the fm_transmitter executable exists in the system path."""
         try:
             subprocess.run(["fm_transmitter", "--version"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
