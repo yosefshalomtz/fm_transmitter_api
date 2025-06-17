@@ -14,7 +14,7 @@ host = "0.0.0.0"
 port = 8080
 
 
-uploaded_files = ["test.wav"]
+uploaded_files = []
 # fm_transmitter app
 fmt = FmTransmitter()
 
