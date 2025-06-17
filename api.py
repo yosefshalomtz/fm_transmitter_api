@@ -67,10 +67,17 @@ def play():
 	fmt.play()
 	return json.dumps({"status": "success"})
 
-@app.route('/api/test')
-def test():
-	return json.dumps({"status":"success"})
+@app.route('/api/stop')
+def stop():
+	fmt.stop()
+	return json.dumps({"status": "success"})
 
+
+def test():
+	# test fm_transmitter is working successfully
+	print("Testing fm_transmitter...")
+	exit(1)
 
 if __name__ == '__main__':
+	test()
 	app.run(host=host, port=port, debug=False)
