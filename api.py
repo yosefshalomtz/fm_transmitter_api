@@ -79,7 +79,7 @@ def test():
 	fmt.play()
 	print("fmt status:", fmt.status)
 	print("Waiting 2 seconds...")
-	sleep(5)
+	sleep(10)
 	print("fmt status:", fmt.status)
 	print("Stopping fmt...")
 	fmt.stop()
