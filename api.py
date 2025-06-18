@@ -26,6 +26,7 @@ def init():
 	# TODO:
 	# check if wav_files directory exists
 	# check if user has permission to perform sudo without password
+	return True
 
 
 
