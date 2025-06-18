@@ -6,22 +6,32 @@
     <title>fm transmitter API</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
     <script src="https://cdn.jsdelivr.net/npm/axios@1.10.0/dist/axios.min.js"></script>
+    <style>
+        html,
+        body {
+            height: 100%;
+            direction: rtl;
+        }
+
+        .centered-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+    </style>
 </head>
 
 <body>
-    <section class="section">
-        <div class="container">
-            <h1 class="title">welcome!</h1>
-        </div>
-        <div class="container">
-            <h2 class="subtitle">fm transmitter API</h2>
-            <p>Use the API to control your fm transmitter.</p>
-        </div>
-        <div class="container">
-            <button class="button is-primary">play</button>
-            <button class="button is-danger">stop</button>
-        </div>
-    </section>
+    <div class="centered-container">
+    <div class="box has-text-centered" style="min-width: 300px;">
+      <h1 class="title is-4">welcome</h1>
+      <div class="buttons is-centered mt-4">
+        <button class="button is-primary">play</button>
+        <button class="button is-link">stop</button>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>
