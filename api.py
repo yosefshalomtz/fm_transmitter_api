@@ -22,7 +22,11 @@ def init():
 	# check if fm_transmitter executable is exsists
 	if not fmt.exists_executable():
 		print("fm_transmitter executable not found, please install it first.")
-		exit(1)
+		return False
+	# TODO:
+	# check if wav_files directory exists
+	# check if user has permission to perform sudo without password
+
 
 
 # {frq} most be valid string=>float, {uploadedfilename} most be one of {uploaded_files} list.
@@ -88,7 +92,7 @@ def test():
 	exit(0)
 
 if __name__ == '__main__':
-	init()
+	if not init(): exit(1)
 	# if first arg is "test", run test function
 	import sys
 	if len(sys.argv) > 1 and sys.argv[1] == "test":
