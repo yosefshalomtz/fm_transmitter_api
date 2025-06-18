@@ -48,9 +48,9 @@ def isValidInput(frq, uploadedfilename):
 def index():
 	return app.send_static_file('main.html')
 
-@app.route('/test')
-def test():
-	return app.send_static_file('test.html')
+@app.route('/main.js')
+def main_js():
+	return app.send_static_file('main.js')
 
 @app.route('/api/getstatus')
 def getstatus():
