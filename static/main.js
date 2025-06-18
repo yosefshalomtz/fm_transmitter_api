@@ -1,6 +1,7 @@
 var status_span = document.getElementById("status");
 var play_button = document.getElementById("play");
 var stop_button = document.getElementById("stop");
+var frequency_input = document.getElementById("frequency");
 // thread that always checks the status of the server
 var checkStatus = setInterval(function () {
     console.log("Checking server status...");
@@ -14,7 +15,7 @@ var checkStatus = setInterval(function () {
 
 play_button.onclick = function () {
     console.log("Play button clicked");
-    var url = "/api/play?frq=" + document.getElementById("frq").value + "&uploadedfilename=block.wav";
+    var url = "/api/play?frq=" + frequency_input.value + "&uploadedfilename=block.wav";
     fetch(url).then(response => response.json()).then(data => {
         console.log("Play response:", data);
     })
