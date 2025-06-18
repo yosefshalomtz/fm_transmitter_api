@@ -9,9 +9,9 @@ var checkStatus = setInterval(function () {
         status_span.textContent = data;
     })
         .catch(error => {
-            status_span.textContent = "Error checking server status";
+            status_span.textContent = "Error checking server status!";
         });
-}, 500);
+}, 1000);
 
 play_button.onclick = function () {
     console.log("Play button clicked");
