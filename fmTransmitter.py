@@ -36,5 +36,4 @@ class FmTransmitter:
 
     def stop(self):
         if self.status == "playing":
-            subprocess.run(["sudo", "kill", "-9", str(self.process.pid)])#, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-            self.process.wait()
+            subprocess.run(["sudo", "kill", str(self.process.pid)])#, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
