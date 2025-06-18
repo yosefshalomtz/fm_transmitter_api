@@ -75,10 +75,10 @@ def stop():
 	return json.dumps({"status": "success"})
 
 
-def test():
+def test(frq):
 	# test fm_transmitter is working successfully
 	print("Testing fm_transmitter...")
-	fmt.frequency = "95.5"
+	fmt.frequency = frq
 	fmt.file = "./wav_files/block.wav"
 	print("fmt playing...")
 	fmt.play()
@@ -96,6 +96,6 @@ if __name__ == '__main__':
 	if not init(): exit(1)
 	# if first arg is "test", run test function
 	import sys
-	if len(sys.argv) > 1 and sys.argv[1] == "test":
-		test()
+	if len(sys.argv) > 2 and sys.argv[1] == "test":
+		test(float(sys.argv[2]))
 	app.run(host=host, port=port, debug=False)
