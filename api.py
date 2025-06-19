@@ -43,7 +43,7 @@ def isValidInput(frq, uploadedfilename):
 	for file_n in uploaded_files:
 		if file_n==uploadedfilename: return True
 	return False
-
+'''
 @app.route('/')
 def index():
 	return app.send_static_file('main.html')
@@ -51,7 +51,7 @@ def index():
 @app.route('/main.js')
 def main_js():
 	return app.send_static_file('main.js')
-
+'''
 @app.route('/api/getstatus')
 def getstatus():
 	return fmt.status
