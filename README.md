@@ -32,6 +32,23 @@ sudo python api.py
 - The server listens on port 80 by default.
 - Open a browser to `http://<raspberrypi-ip>/` to access the web UI.
 
+## Test fm_transmitter
+
+You can test the FM transmitter functionality directly from the command line using the built-in test mode in `api.py`. This will play the default WAV file (`block.wav`) at a specified frequency for a few seconds, then stop automatically.
+
+**Usage:**
+```bash
+sudo python api.py test <frequency>
+```
+Replace `<frequency>` with the desired FM frequency (e.g., `101.1`).
+
+This test will:
+- Start the FM transmitter at the given frequency using `block.wav`
+- Play for 6 seconds
+- Stop the transmission and exit
+
+Use this to verify your hardware and software setup before using the web interface or API.
+
 ## API Endpoints
 - `GET /api/play?frq=<frequency>&uploadedfilename=block.wav`  
   Start transmitting at the given frequency (e.g., 101.1) using the specified WAV file.
