@@ -5,6 +5,7 @@ from flask import Flask, request, send_from_directory
 import os
 import json
 import math
+import sys
 from time import sleep
 from fmTransmitter import FmTransmitter
 
@@ -104,9 +105,9 @@ def test(frq):
 	exit(0)
 
 if __name__ == '__main__':
+	print("Starting fm_transmitter flask API wrapper...")
 	if not init(): exit(1)
 	# if first arg is "test", run test function
-	import sys
 	if len(sys.argv) > 2 and sys.argv[1] == "test":
 		test(float(sys.argv[2]))
 	app.run(host=host, port=port, debug=False)
