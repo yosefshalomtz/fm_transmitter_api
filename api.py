@@ -1,7 +1,8 @@
 # fm_transmitter flask REST API wrapper, for raspberry pi zero w.
 # created by: yosefshalomtz@gmail.com
 
-from flask import Flask, request
+from flask import Flask, request, send_from_directory
+import os
 import json
 import math
 from time import sleep
@@ -43,15 +44,18 @@ def isValidInput(frq, uploadedfilename):
 	for file_n in uploaded_files:
 		if file_n==uploadedfilename: return True
 	return False
-'''
-@app.route('/')
-def index():
-	return app.send_static_file('main.html')
 
-@app.route('/main.js')
-def main_js():
-	return app.send_static_file('main.js')
-'''
+@app.route('/<path:filename>')
+def serve_static_files(filename):
+    file_path = os.path.join(app.static_folder, filename)
+    if os.path.isfile(file_path):
+        return send_from_directory(app.static_folder, filename)
+    return "404 Not Found", 404
+
+@app.route('/')
+def serve_index():
+    return send_from_directory(app.static_folder, 'main.html')
+
 @app.route('/api/getstatus')
 def getstatus():
 	return fmt.status
