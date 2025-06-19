@@ -101,7 +101,7 @@ def test(frq):
 	print("fmt playing...")
 	fmt.play()
 	print("fmt status:", fmt.status)
-	print("Waiting 2 seconds...")
+	print("Waiting 6 seconds...")
 	sleep(6)
 	print("fmt status:", fmt.status)
 	print("Stopping fmt...")
