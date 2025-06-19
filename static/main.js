@@ -19,6 +19,7 @@ play_button.onclick = function () {
         // set status text
     });
 }
+
 stop_button.onclick = function () {
     console.log("Stop button clicked");
     fetch("/api/stop").then(response => response.json()).then(data => {
@@ -33,3 +34,11 @@ stop_button.onclick = function () {
         status_span.textContent = "Error stopping sound";
     });
 }
+
+// if frequency input got ENTER key pressed, call play
+frequency_input.addEventListener("keydown", function(event) {
+    if (event.code === "Enter") {
+        console.log("Enter key pressed in frequency input");
+        play_button.click();
+    }
+});
