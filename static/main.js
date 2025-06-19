@@ -3,7 +3,7 @@ var play_button = document.getElementById("play");
 var stop_button = document.getElementById("stop");
 var frequency_input = document.getElementById("frequency");
 // thread that always checks the status of the server
-var checkStatus = setInterval(function () {
+/**var checkStatus = setInterval(function () {
     console.log("Checking server status...");
     fetch("/api/getstatus").then(response => response.text()).then(data => {
         status_span.textContent = data;
@@ -11,7 +11,7 @@ var checkStatus = setInterval(function () {
         .catch(error => {
             status_span.textContent = "Error checking server status!";
         });
-}, 1000);
+}, 1000);*/
 
 play_button.onclick = function () {
     console.log("Play button clicked");

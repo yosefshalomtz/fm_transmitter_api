@@ -1,6 +1,7 @@
 import subprocess
 import threading
 import shutil
+from time import sleep
 
 class FmTransmitter:
     def __init__(self):
@@ -18,6 +19,7 @@ class FmTransmitter:
                 self.status = "playing"
             else:
                 self.status = "stopped"
+            sleep(0.5)
 
     def exists_executable(self):
         """Check if the fm_transmitter executable exists in the system path."""
