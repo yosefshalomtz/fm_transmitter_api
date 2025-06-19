@@ -10,7 +10,7 @@ from fmTransmitter import FmTransmitter
 
 app = Flask(__name__)
 host = "0.0.0.0"
-port = 8080
+port = 80
 
 
 uploaded_files = ["block.wav"]
