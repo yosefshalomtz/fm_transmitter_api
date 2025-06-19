@@ -14,6 +14,15 @@
             direction: ltr;
         }
 
+        html {
+            background-image: url("radio.svg");
+            background-size: contain;
+            background-repeat: no-repeat;
+            filter: blur(5px);
+            width: 100px;
+            height: 100px;
+        }
+
         .centered-container {
             display: flex;
             justify-content: center;
@@ -25,17 +34,17 @@
 
 <body>
     <div class="centered-container">
-    <div class="box has-text-centered" style="min-width: 300px;">
-      <h1 class="title is-4">welcome to FM blocker!</h1>
-      <input class="input is-primary" type="text" id="frequency" placeholder="Enter frequency (e.g., 101.1)">
-      <div class="buttons is-centered mt-4">
-        <button class="button is-primary" id="play">play</button>
-        <button class="button is-danger" id="stop">stop</button>
-      </div>
-      <p class="subtitle is-6 mt-4">status: <span id="status">stopped</span></p>
+        <div class="box has-text-centered" style="min-width: 300px;">
+            <h1 class="title is-4">welcome to FM blocker!</h1>
+            <input class="input is-primary" type="text" id="frequency" placeholder="Enter frequency (e.g., 101.1)">
+            <div class="buttons is-centered mt-4">
+                <button class="button is-primary" id="play">play</button>
+                <button class="button is-danger" id="stop">stop</button>
+            </div>
+            <p class="subtitle is-6 mt-4">status: <span id="status">stopped</span></p>
+        </div>
     </div>
-  </div>
-  <script src="./main.js"></script>
+    <script src="./main.js"></script>
 </body>
 
 </html>
