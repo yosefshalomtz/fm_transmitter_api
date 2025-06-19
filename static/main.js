@@ -1,5 +1,3 @@
-const { stat } = require("node:fs");
-
 var status_span = document.getElementById("status");
 var play_button = document.getElementById("play");
 var stop_button = document.getElementById("stop");
