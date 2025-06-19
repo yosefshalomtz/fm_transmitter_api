@@ -16,13 +16,20 @@
         }
 
         .background {
-            filter: blur(20px);
             position: absolute;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
             z-index: -1;
+            background-image: repeating-linear-gradient(45deg,
+                    orange,
+                    orange 2px,
+                    transparent 2px,
+                    transparent 20px);
+            filter: blur(4px);
+            opacity: 0.4;
+            pointer-events: none;
         }
 
         .centered-container {
@@ -36,7 +43,7 @@
 </head>
 
 <body>
-    <img class="background" src="radio.svg" alt="Background Image">        
+    <div class="background"></div>
     <div class="centered-container">
         <div class="box has-text-centered" style="min-width: 300px;">
             <h1 class="title is-4">welcome to FM blocker!</h1>
