@@ -71,7 +71,12 @@ def play():
 	input_validation = isValidInput(frq, uploadedfilename)
 	if not input_validation==True: return json.dumps({"status": f"error invalid parameter: {input_validation}"})
 	# check if fm_transmitter is already running
-	if fmt.status=="playing": return json.dumps({"status": "error fm_transmitter already running"})
+	# if frq is same as current frequency, return success. otherwise, stop current fm_transmitter and start new one.
+	if (fmt.status=="playing"):
+		if fmt.frequency==frq and (fmt.file=="./wav_files/" + uploadedfilename): return json.dumps({"status": "success"})
+		else:
+			fmt.stop()
+			# then play new frequency and file
 	# play the fm_transmitter
 	fmt.frequency = frq
 	fmt.file = "./wav_files/" + uploadedfilename

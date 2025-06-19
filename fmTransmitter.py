@@ -16,10 +16,8 @@ class FmTransmitter:
         while True:
             # check if self.process is process object and if it is running
             if (self.process is not None) and (self.process.poll() is None):
-                self.status = "playing"
-            else:
+                self.process.wait()
                 self.status = "stopped"
-            sleep(0.5)
 
     def exists_executable(self):
         """Check if the fm_transmitter executable exists in the system path."""
@@ -33,9 +31,11 @@ class FmTransmitter:
         """Start the fm_transmitter process with the specified frequency and file."""
         self.process = subprocess.Popen(['sudo', shutil.which("fm_transmitter"), '-f', str(self.frequency), self.file, '-r'],
             stderr=subprocess.DEVNULL, stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL)
+        self.status = "playing"
 
 
     def stop(self):
         if self.status == "playing":
             subprocess.run(["sudo", "pkill", '-f', 'fm_transmitter'],
                 stderr=subprocess.DEVNULL, stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL)
+        self.status = "stopped"
