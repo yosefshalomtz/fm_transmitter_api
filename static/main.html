@@ -14,13 +14,13 @@
             direction: ltr;
         }
 
-        html {
-            background-image: url("radio.svg");
-            background-size: contain;
-            background-repeat: no-repeat;
+        .background {
             filter: blur(5px);
-            width: 100px;
-            height: 100px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
         }
 
         .centered-container {
@@ -33,6 +33,7 @@
 </head>
 
 <body>
+    <img class="background" src="radio.svg" alt="Background Image">        
     <div class="centered-container">
         <div class="box has-text-centered" style="min-width: 300px;">
             <h1 class="title is-4">welcome to FM blocker!</h1>
