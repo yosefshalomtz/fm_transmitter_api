@@ -37,7 +37,7 @@ stop_button.onclick = function () {
 
 // if frequency input got ENTER key pressed, call play
 frequency_input.addEventListener("keydown", function(event) {
-    if (event.code === "Enter") {
+    if (event.code === "Enter" || event.key === "Enter") {
         console.log("Enter key pressed in frequency input");
         play_button.click();
     }
