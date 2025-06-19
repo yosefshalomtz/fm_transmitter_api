@@ -34,17 +34,17 @@ def init():
 # {frq} most be valid string=>float, {uploadedfilename} most be one of {uploaded_files} list.
 def isValidInput(frq, uploadedfilename):
 	# check if got two args
-	if frq==None or uploadedfilename==None: return False
+	if frq==None or uploadedfilename==None: return "too few arguments"
 	# check if {frq} is valid float
 	try:
 		frq_num = float(frq)
-		if not math.isfinite(frq_num): return False
+		if not math.isfinite(frq_num): return "invalid frequency"
 	except Exception:
-		return False
+		return "invalid frequency"
 	# check if {uploadedfilename} is exists file in server
 	for file_n in uploaded_files:
 		if file_n==uploadedfilename: return True
-	return False
+	return "invalid uploaded file name (not exists in server)"
 
 @app.route('/<path:filename>')
 def serve_static_files(filename):
@@ -68,7 +68,8 @@ def play():
 	frq = request.args.get('frq')
 	uploadedfilename = request.args.get('uploadedfilename')
 	
-	if not isValidInput(frq, uploadedfilename): return json.dumps({"status": "error invalid parameter"})
+	input_validation = isValidInput(frq, uploadedfilename)
+	if not input_validation==True: return json.dumps({"status": f"error invalid parameter: {input_validation}"})
 	# check if fm_transmitter is already running
 	if fmt.status=="playing": return json.dumps({"status": "error fm_transmitter already running"})
 	# play the fm_transmitter
