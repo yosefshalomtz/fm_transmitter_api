@@ -24,9 +24,6 @@ def init():
 	if not fmt.exists_executable():
 		print("fm_transmitter executable not found, please install it first.")
 		return False
-	# TODO:
-	# check if wav_files directory exists
-	# check if user has permission to perform sudo without password
 	return True
 
 
